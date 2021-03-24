@@ -1,0 +1,1 @@
+@pyw.exe C:\Python64\password.pyw %*
