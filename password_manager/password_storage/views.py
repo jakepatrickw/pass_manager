@@ -27,6 +27,7 @@ class CreatePassword(CreateAPIView):
 
 
 class DeletePassword(DestroyAPIView):
+    queryset = UsernamePasswordService.objects.all()
     permission_classes = [AllowAny]
     serializer_class = PassWordSerializer
-    
+    lookup_field = 'id'
