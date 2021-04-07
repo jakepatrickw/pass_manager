@@ -8,7 +8,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView,
 
 from rest_framework.permissions import AllowAny
 from .models import UsernamePasswordService
-from .serializer import PassWordSerializer
+from .serializer import PassWordSerializer, UpdatePassWordSerializer
 
 
 
@@ -16,6 +16,7 @@ class ListPassword(ListAPIView):
     queryset = UsernamePasswordService.objects.all()
     serializer_class = PassWordSerializer
     permission_classes = [AllowAny]
+    filter_backends = [DjangoFilterBackend]
 
 
 class CreatePassword(CreateAPIView):
@@ -27,7 +28,13 @@ class CreatePassword(CreateAPIView):
 
 
 class DeletePassword(DestroyAPIView):
-    queryset = UsernamePasswordService.objects.all()
     permission_classes = [AllowAny]
     serializer_class = PassWordSerializer
+    queryset = UsernamePasswordService.objects.all()
+    lookup_field = 'id'
+
+class UpdatePassword(UpdateAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = UpdatePassWordSerializer
+    queryset = UsernamePasswordService.objects.all()
     lookup_field = 'id'
